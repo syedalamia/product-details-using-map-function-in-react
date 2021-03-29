@@ -1,16 +1,20 @@
 import React, { useState } from "react";
+import { useLocation, useParams } from "react-router";
 
-function ProductDEtails() {
+function ProductDEtails(props) {
   const [productList, productListCall] = useState([
     {
       name: "samsung",
       phone: "019",
     },
     {
-      name: "Lg",
+      name: "Motorola",
       phone: "018",
     },
   ]);
+
+  const clickedButton = useParams();
+  console.log("the clicked button was", clickedButton);
 
   return (
     <>
@@ -21,7 +25,13 @@ function ProductDEtails() {
               <>
                 <h2>Item - {index + 1}</h2>
                 <h2>{data.name}</h2>
-                <button>See Details</button>
+                <button
+                  onClick={() => {
+                    props.passingFunction(productList[index], index + 1);
+                  }}
+                >
+                  See Details
+                </button>
               </>
             );
           })}
